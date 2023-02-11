@@ -3,3 +3,4 @@ compose.yml
 package-lock.json
 dod
 .env
+config

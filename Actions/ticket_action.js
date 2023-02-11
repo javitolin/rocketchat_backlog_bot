@@ -9,7 +9,7 @@ const ADO_DOD_FILEPATH = config.get("ado.task.dod_filepath")
 const ADO_PARENT_TASK_ID = config.get("ado.task.parent_task_id")
 const ADO_TAGS = config.get("ado.task.tags")
 
-const key_words = config.get("ticket_action.key_words");
+const key_words = config.get("actions.ticket_action.key_words");
 function isMatch(message) {
     return key_words.some(word => message.startsWith(word));
 }
