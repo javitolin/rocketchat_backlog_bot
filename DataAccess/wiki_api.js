@@ -1,7 +1,5 @@
 const adoClient = require("./search_api")
-const config = require('config');
-
-const ADO_API_VERSION = config.get("ado.api_version")
+const configuration = require('config');
 
 async function SearchWiki(message, maxNumberOfResults) {
     var data = {
@@ -15,7 +13,7 @@ async function SearchWiki(message, maxNumberOfResults) {
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `/search/wikisearchresults?recursionLevel=full&includeContent=True&api-version=${ADO_API_VERSION}`,
+        url: configuration.get("ado.wiki.wiki_search_url"),
         data: data
     };
 

@@ -1,6 +1,7 @@
 const WikiAction = require("./wiki_action")
 const TicketAction = require("./ticket_action")
 const DefaultAction = require("./default_action")
+const StaticAction = require("./static_action")
 const HelperAction = require("./helper_action")
 
 function MapAction(message) {
@@ -18,6 +19,10 @@ function MapAction(message) {
 
     if (TicketAction.isMatch(message)) {
         return TicketAction.act;
+    }
+
+    if (StaticAction.isMatch(message)) {
+        return StaticAction.act;
     }
 
     console.log("Returning Default action");

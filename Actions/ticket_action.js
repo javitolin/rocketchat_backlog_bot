@@ -17,8 +17,14 @@ function isMatch(message) {
 async function act(message, requestor_name) {
     message = Helper.getTextFromMessage(message);
     
-    var description = `User: ${requestor_name}. \nMessage: ${message}`;
-    var title = `Auto Ticket from - ${requestor_name}`;
+    var description = config.get("ado.task.description_format");
+    description = description.replace("{requestor_name}", requestor_name);
+    description = description.replace("{message}", message);
+
+    var title = config.get("ado.task.title_format");
+    title = title.replace("{requestor_name}", requestor_name);
+    title = title.replace("{message}", message);
+
     var dod_content = (await fs.readFile(ADO_DOD_FILEPATH)).toString();
     var area_path = ADO_AREA_PATH;
     var parent_task_id = ADO_PARENT_TASK_ID;

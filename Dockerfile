@@ -1,9 +1,12 @@
-FROM node:16
+FROM node:19 AS build
 WORKDIR /app
-COPY package.json ./
-
-RUN npm install
 COPY . .
+RUN npm install
+
+FROM node:19-alpine
+WORKDIR /app
+COPY --from=build /app /app
+
 CMD [ "node", "server.js" ]
 
-# docker run -it -v /mnt/c/projects/RocketBot/config:/app/config --entrypoint sh rocketbotado
+# docker build . -t rocketadobot && docker run -it -v /mnt/c/projects/RocketBot/config:/app/config -v /mnt/c/projects/RocketBot/dod:/data/dod rocketadobot

@@ -43,3 +43,10 @@ services:
       MONGODB_ADVERTISED_HOSTNAME: ${MONGODB_ADVERTISED_HOSTNAME:-mongodb}
       MONGODB_ENABLE_JOURNAL: ${MONGODB_ENABLE_JOURNAL:-true}
       ALLOW_EMPTY_PASSWORD: ${ALLOW_EMPTY_PASSWORD:-yes}
+  
+  rocketadobot:
+    image: rocketadobot
+    restart: on-failure
+    volumes:
+      - /mnt/c/projects/RocketBot/config:/app/config
+      - /mnt/c/projects/RocketBot/dod:/data/dod

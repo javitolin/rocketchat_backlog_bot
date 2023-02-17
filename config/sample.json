@@ -1,0 +1,78 @@
+{
+    "rocketchat": {
+        "url": "<RocketChatURL>",
+        "user": "<BotUser>",
+        "password": "<BotPassword>",
+        "use_ssl": "",
+        "bot_room": "ticket",
+        "field_for_name": "name"
+    },
+    "ado": {
+        "api_version": "7.0",
+        "url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_apis",
+        "pat": "<YOUR PAT>",
+        "alm_url": "https://almsearch.dev.azure.com/<CollectionName>/<ProjectName>/_apis",
+        "task": {
+            "dod_filepath": "dod",
+            "area_path": "<AreaPath>",
+            "parent_task_id": 3,
+            "tags": "tag1;tag2",
+            "default_assignee": "",
+            "title_format": "{message}",
+            "description_format": "Auto ticket from bot. User: {requestor_name}. \nMessage: {message}"
+        },
+        "wiki": {
+            "wiki_url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_wiki/wikis",
+            "max_search_results": 10,
+            "wiki_search_url": "/search/wikisearchresults?recursionLevel=full&includeContent=True&api-version=7.0",
+            "wiki_result_url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_wiki/wikis/{project}?pagePath={path_no_md}"
+        }
+    },
+    "actions": {
+        "ticket_action": {
+            "key_words": [
+                "open",
+                "create"
+            ],
+            "type": "api",
+            "description": "Open a new ticket",
+            "usage": "`create \"Some bug that happens\"`"
+        },
+        "wiki_search": {
+            "key_words": [
+                "find",
+                "search"
+            ],
+            "type": "api",
+            "description": "Search the wiki",
+            "usage": "`find \"Something\"`"
+        },
+        "google_search": {
+            "key_words": [
+                "google"
+            ],
+            "type": "static",
+            "description": "Search google",
+            "usage": "`google \"something\"`",
+            "response": "Here you have it: [click me!](https://www.google.com/search?q={term})"
+        },
+        "github_search": {
+            "key_words": [
+                "github"
+            ],
+            "type": "static",
+            "description": "Search github",
+            "usage": "`github \"something\"`",
+            "response": "Here you have it: [click me!](https://github.com/search?q={term})"
+        },
+        "help": {
+            "key_words": [
+                "help",
+                "usage"
+            ],
+            "type": "help",
+            "description": "Get help",
+            "usage": "help"
+        }
+    }
+}

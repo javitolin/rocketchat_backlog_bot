@@ -10,6 +10,19 @@ function isMatch(message) {
     return key_words.some(word => message.startsWith(word));
 }
 
+function build_wiki_url(result) {
+    let wiki_result_url = config.get("ado.wiki.wiki_result_url");
+
+    wiki_result_url = wiki_result_url.replace("{project}", result.wiki.name);
+    wiki_result_url = wiki_result_url.replace("{path}", result.path);
+    wiki_result_url = wiki_result_url.replace("{path_no_md}", result.path.replace(".md", ""));
+    wiki_result_url = wiki_result_url.replace("{wiki_name}", result.wiki.name);
+    wiki_result_url = wiki_result_url.replace("{wiki_id}", result.wiki.id);
+    wiki_result_url = wiki_result_url.replace("{project_id}", result.project.id);
+    wiki_result_url = wiki_result_url.replace("{content_id}", result.contentId);
+    return wiki_result_url;
+}
+
 async function act(searchTerm, requestor_name) {
     searchTerm = Helper.getTextFromMessage(searchTerm);
 
@@ -27,10 +40,10 @@ async function act(searchTerm, requestor_name) {
 
     for (let i = 0; i < response.count; i++) {
         let result = response.results[i];
-        var project_wiki = result.wiki.name;
-        var wiki_path = result.path.replace(".md", "");
+        console.log("result", result);
+        let wiki_result_url = build_wiki_url(result);
         var fileName = result.fileName;
-        return_answer.push(`[${fileName}](${ADO_WIKI_URL}/${project_wiki}?pagePath=${wiki_path})`)
+        return_answer.push(`- [${fileName}](${wiki_result_url})`)
     }
 
     return return_answer

@@ -27,9 +27,9 @@ searchApi.interceptors.response.use(
     return response;
   },
   function (error) {
-    let res = error.response;
-    console.error(error.message)
-    console.error(`Looks like there was a problem. Status Code: ${res.status}`);
+    let res = error?.response;
+    console.error("error: ", error?.message)
+    console.error(`Looks like there was a problem. Status Code: ${res?.status}`);
     return Promise.reject(error);
   }
 );

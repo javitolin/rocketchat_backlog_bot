@@ -1,7 +1,6 @@
 const config = require('config');
-const Helper = require("./action_helper")
 
-const key_words = config.get("actions.usage.key_words");
+const key_words = config.get("actions.help.key_words");
 function isMatch(message) {
     return key_words.some(word => message.startsWith(word));
 }
@@ -11,7 +10,11 @@ function getCommands() {
     let result = [];
     for (var key of Object.keys(actions)) {
         let current_action = actions[key];
-        result.push(`${current_action.description}: ${current_action.key_words.join(", ")}. Example: ${current_action.example}`)
+        let usage_string = `## ${current_action.description}\r\n`;
+        usage_string += `- Key words: ${current_action.key_words.join(", ")}\r\n`;
+        usage_string += `- Type: ${current_action.type}\r\n`;
+        usage_string += `- Usage: ${current_action.usage}\r\n`;
+        result.push(usage_string);
     }
 
     return result;

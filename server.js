@@ -27,7 +27,7 @@ function getFunnyErrorMessage() {
     "Our systems have experienced a minor hiccup, like a sneeze in the middle of a concert.",
     "A wild error has appeared! But don't worry, our IT wizards are on the case."
   ];
-  
+
   const randomIndex = Math.floor(Math.random() * messages.length);
   return messages[randomIndex];
 }
@@ -90,8 +90,15 @@ const processMessages = async (err, message, messageOptions) => {
   }
 
   function parseMessage(message) {
+    console.log("message", message)
+    var field_for_name = config.get("rocketchat.field_for_name");
+    var username = message.u.username;
+    if (field_for_name === "name") {
+      username = message.u.name;
+    }
+
     return {
-      username: message.u.username,
+      username: username,
       message: message.msg
     }
   }
