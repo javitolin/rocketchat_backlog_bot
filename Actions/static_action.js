@@ -32,7 +32,7 @@ async function act(message, requestor_name) {
     }
 
     message = Helper.getTextFromMessage(message);
-    return found_static_commands.response.replace("{term}", message);
+    return found_static_commands.response.replace("{term}", message).replace("{requestor}", requestor_name);
 }
 
 module.exports = { act, isMatch };
