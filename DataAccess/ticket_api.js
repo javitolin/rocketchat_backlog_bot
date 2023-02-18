@@ -1,8 +1,7 @@
 const adoClient = require("./ado_api")
-const config = require('config');
+const configuration = require('config');
 
-const ADO_URL = config.get("ado.url")
-const ADO_API_VERSION = config.get("ado.api_version")
+const ADO_URL = configuration.get("ado.url")
 
 async function OpenTicket(title, description, dod_content, area_path, parent_task_id, tags, assignee) {
 
@@ -59,7 +58,7 @@ async function OpenTicket(title, description, dod_content, area_path, parent_tas
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: `/wit/workitems/$Product Backlog Item?api-version=${ADO_API_VERSION}`,
+        url: configuration.get("ado.task.task_url"),
         data: data
     };
 

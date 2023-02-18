@@ -8,11 +8,11 @@
         "field_for_name": "name"
     },
     "ado": {
-        "api_version": "7.0",
         "url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_apis",
         "pat": "<YOUR PAT>",
         "alm_url": "https://almsearch.dev.azure.com/<CollectionName>/<ProjectName>/_apis",
         "task": {
+            "task_url": "/wit/workitems/$Product Backlog Item?api-version=7.0",
             "dod_filepath": "dod",
             "area_path": "<AreaPath>",
             "parent_task_id": 3,
@@ -73,6 +73,15 @@
             "type": "help",
             "description": "Get help",
             "usage": "help"
+        },
+        "dev_help": {
+            "key_words": [
+                "devhelp"
+            ],
+            "match_type": "exact",
+            "type": "help",
+            "description": "Get development help",
+            "usage": "devhelp"
         }
     }
 }

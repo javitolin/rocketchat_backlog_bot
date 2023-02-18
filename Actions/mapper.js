@@ -3,10 +3,15 @@ const TicketAction = require("./ticket_action")
 const DefaultAction = require("./default_action")
 const StaticAction = require("./static_action")
 const HelperAction = require("./helper_action")
+const DevHelperAction = require("./dev_helper_action")
 
 function MapAction(message) {
     if (HelperAction.isMatch(message)) {
         return HelperAction.act;
+    }
+    
+    if (DevHelperAction.isMatch(message)) {
+        return DevHelperAction.act;
     }
 
     if (!message.includes("\"")) {

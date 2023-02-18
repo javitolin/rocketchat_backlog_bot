@@ -1,5 +1,5 @@
 const OpenTicket = require("../DataAccess/ticket_api")
-const Helper = require("./action_helper")
+const Helper = require("./action_utils")
 const fs = require("fs").promises
 const config = require('config');
 
@@ -9,9 +9,10 @@ const ADO_DOD_FILEPATH = config.get("ado.task.dod_filepath")
 const ADO_PARENT_TASK_ID = config.get("ado.task.parent_task_id")
 const ADO_TAGS = config.get("ado.task.tags")
 
-const key_words = config.get("actions.ticket_action.key_words");
 function isMatch(message) {
-    return key_words.some(word => message.startsWith(word));
+    const key_words = config.get("actions.ticket_action.key_words");
+    const match_type = config.get("actions.ticket_action.match_type");
+    return Helper.getMatchFunc(match_type)(message, key_words);
 }
 
 async function act(message, requestor_name) {

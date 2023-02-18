@@ -1,13 +1,13 @@
 const SearchWiki = require("../DataAccess/wiki_api")
 const config = require('config');
-const Helper = require("./action_helper")
+const Helper = require("./action_utils");
 
 const MAX_SEARCH_RESULTS = config.get("ado.wiki.max_search_results")
-const ADO_WIKI_URL = config.get("ado.wiki.wiki_url")
 
-const key_words = config.get("actions.wiki_search.key_words");
 function isMatch(message) {
-    return key_words.some(word => message.startsWith(word));
+    const key_words = config.get("actions.wiki_search.key_words");
+    const match_type = config.get("actions.wiki_search.match_type");
+    return Helper.getMatchFunc(match_type)(message, key_words);
 }
 
 function build_wiki_url(result) {

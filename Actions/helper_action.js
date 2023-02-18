@@ -1,8 +1,10 @@
 const config = require('config');
+const Helper = require("./action_utils");
 
-const key_words = config.get("actions.help.key_words");
 function isMatch(message) {
-    return key_words.some(word => message.startsWith(word));
+    const key_words = config.get("actions.help.key_words");
+    const match_type = config.get("actions.help.match_type");
+    return Helper.getMatchFunc(match_type)(message, key_words);
 }
 
 function getCommands() {
@@ -24,6 +26,7 @@ function act(message, requestor_name) {
     let result = ["Sure! Here are the commands I understand:"];
     result = result.concat(getCommands());
     result.push("Don't forget to add \"\" for the term");
+    result.push(`For more information, please contact ${config.get("rocketchat.bot_manager_user")}`)
     return result;
 }
 
