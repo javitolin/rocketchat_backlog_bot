@@ -22,7 +22,6 @@
             "description_format": "Auto ticket from bot. User: {requestor_name}. \nMessage: {message}"
         },
         "wiki": {
-            "wiki_url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_wiki/wikis",
             "max_search_results": 10,
             "wiki_search_url": "/search/wikisearchresults?recursionLevel=full&includeContent=True&api-version=7.0",
             "wiki_result_url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_wiki/wikis/{project}?pagePath={path_no_md}"

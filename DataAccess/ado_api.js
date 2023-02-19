@@ -1,7 +1,7 @@
 const config = require('config');
 const axios = require("axios")
 
-const ADO_URL = config.get("ado.url")
+const ADO_URL = encodeURI(config.get("ado.url"));
 const ADO_PAT = config.get("ado.pat")
 
 // ADO_URL (Should be https://{instance}/{collection}/{project}/_apis)

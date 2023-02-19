@@ -1,7 +1,7 @@
 const adoClient = require("./ado_api")
 const configuration = require('config');
 
-const ADO_URL = configuration.get("ado.url")
+const ADO_URL = configuration.get("ado.url");
 
 async function OpenTicket(title, description, dod_content, area_path, parent_task_id, tags, assignee) {
 
@@ -34,7 +34,7 @@ async function OpenTicket(title, description, dod_content, area_path, parent_tas
         "path": "/relations/-",
         "value": {
             "rel": "System.LinkTypes.Hierarchy-Reverse",
-            "url": `${ADO_URL}/wit/workitems/${parent_task_id}`
+            "url": encodeURI(`${ADO_URL}/wit/workitems/${parent_task_id}`)
         }
     }];
 

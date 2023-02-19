@@ -20,7 +20,7 @@ function build_wiki_url(result) {
     wiki_result_url = wiki_result_url.replace("{wiki_id}", result.wiki.id);
     wiki_result_url = wiki_result_url.replace("{project_id}", result.project.id);
     wiki_result_url = wiki_result_url.replace("{content_id}", result.contentId);
-    return wiki_result_url;
+    return encodeURI(wiki_result_url);
 }
 
 async function act(searchTerm, requestor_name) {

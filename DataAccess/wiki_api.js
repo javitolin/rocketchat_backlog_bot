@@ -13,7 +13,7 @@ async function SearchWiki(message, maxNumberOfResults) {
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: configuration.get("ado.wiki.wiki_search_url"),
+        url: encodeURI(configuration.get("ado.wiki.wiki_search_url")),
         data: data
     };
 

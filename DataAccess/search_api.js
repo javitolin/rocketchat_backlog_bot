@@ -1,7 +1,7 @@
 const axios = require("axios")
 const config = require('config');
 
-const ADO_ALM_URL = config.get("ado.alm_url")
+const ADO_ALM_URL = encodeURI(config.get("ado.alm_url"))
 const ADO_PAT = config.get("ado.pat")
 
 // ADO_ALM_URL (Should be https://almsearch.{instance}/{collection}/{project}/_apis)
@@ -14,7 +14,7 @@ if (!ADO_ALM_URL || !ADO_PAT) {
 const ENCODED_PAT = Buffer.from(`:${ADO_PAT}`).toString('base64');
 
 const searchApi = axios.create({
-  baseURL: ADO_ALM_URL,
+  baseURL: encodeURI(ADO_ALM_URL),
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
