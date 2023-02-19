@@ -14,6 +14,10 @@ function MapAction(message) {
         return DevHelperAction.act;
     }
 
+    if (StaticAction.isMatch(message)) {
+        return StaticAction.act;
+    }
+
     if (!message.includes("\"")) {
         DefaultAction.act;
     }
@@ -24,10 +28,6 @@ function MapAction(message) {
 
     if (TicketAction.isMatch(message)) {
         return TicketAction.act;
-    }
-
-    if (StaticAction.isMatch(message)) {
-        return StaticAction.act;
     }
 
     console.log("Returning Default action");

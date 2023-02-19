@@ -11,6 +11,7 @@ function act(message, requestor_name) {
     let result = ["### General"]
     result.push("- field_for_name - Can be `name` or `username`");
     result.push("- bot_room - Must be some existing room");
+    result.push("- bot_manager_user - The user responsible for managing the bot");
     result.push("### actions");
     result.push("match_type can be any of the following: ");
     result.push("- endsWith - uses `endsWith` to match");
@@ -23,6 +24,8 @@ function act(message, requestor_name) {
     result.push(" - Can be added directly to the config file, without the need to add code");
     result.push(" - Replaces `{message}` with the message sent by the user (encapsulated in `\"\"`)");
     result.push(" - Replaces `{requestor_name}` with the user's name (configurable in `{field_for_name}`)");
+    result.push(" - Set `has_user_message` to false if not message from the user is required. i.e no `\"\"`. \r\n`{requestor_name}` will still be replaced with the user's name");
+    result.push(" - if `response` is an array, a random element will be chosen");
     result.push("### wiki_result_url");
     result.push(" - Replaces `{project}` with the project name");
     result.push(" - Replaces `{path}` with the path name");
@@ -37,7 +40,8 @@ function act(message, requestor_name) {
     result.push("### Ticket Action - Description format");
     result.push(" - Replaces `{message}` with the message sent by the user (encapsulated in `\"\"`)");
     result.push(" - Replaces `{requestor_name}` with the user's name (configurable in `{field_for_name}`)");
-    result.push(`For more information, please contact ${config.get("rocketchat.bot_manager_user")}`)
+    
+    result.push(`For more information, please contact ${config.get("rocketchat.bot_manager_user")} (i.e \`bot_manager_user\`)`)
     return result;
 }
 

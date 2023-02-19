@@ -32,6 +32,8 @@ function isMatch(message) {
     if (findMatch(message)) {
         return true;
     }
+
+    return false;
 }
 
 async function act(message, requestor_name) {
@@ -40,8 +42,18 @@ async function act(message, requestor_name) {
         return `Static command for message [${message}] not found... Weird.`;
     }
 
-    message = Helper.getTextFromMessage(message);
-    return found_static_commands.response.replace("{message}", message).replace("{requestor_name}", requestor_name);
+    let response = found_static_commands.response;
+
+    if (Array.isArray(found_static_commands.response)) {
+        response = found_static_commands.response[Math.floor(Math.random() * found_static_commands.response.length)];
+    }
+
+    if (found_static_commands.has_user_message) {
+        message = Helper.getTextFromMessage(message);
+        return response.replace("{message}", message).replace("{requestor_name}", requestor_name);
+    }
+
+    return response.replace("{requestor_name}", requestor_name);
 }
 
 module.exports = { act, isMatch };

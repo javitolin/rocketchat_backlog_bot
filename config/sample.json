@@ -5,7 +5,8 @@
         "password": "<BotPassword>",
         "use_ssl": "",
         "bot_room": "ticket",
-        "field_for_name": "name"
+        "field_for_name": "name",
+        "bot_manager_user": "@dev"
     },
     "ado": {
         "url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_apis",
@@ -33,6 +34,7 @@
                 "open",
                 "create"
             ],
+            "match_type": "startsWith",
             "type": "api",
             "description": "Open a new ticket",
             "usage": "`create \"Some bug that happens\"`"
@@ -42,6 +44,7 @@
                 "find",
                 "search"
             ],
+            "match_type": "startsWith",
             "type": "api",
             "description": "Search the wiki",
             "usage": "`find \"Something\"`"
@@ -50,25 +53,41 @@
             "key_words": [
                 "google"
             ],
+            "match_type": "startsWith",
             "type": "static",
             "description": "Search google",
             "usage": "`google \"something\"`",
-            "response": "Here you have it: [click me!](https://www.google.com/search?q={term})"
+            "response": "Here you have it: [click me!](https://www.google.com/search?q={message})",
+            "has_user_message": true
         },
         "github_search": {
             "key_words": [
-                "github"
+                "github .*"
             ],
+            "match_type": "regex",
             "type": "static",
             "description": "Search github",
             "usage": "`github \"something\"`",
-            "response": "Here you have it: [click me!](https://github.com/search?q={term})"
+            "response": "Here you have it: [click me!](https://github.com/search?q={message})",
+            "has_user_message": true
         },
+        "static_response": {
+            "key_words": [
+                "^[Hh]ello"
+            ],
+            "match_type": "regex",
+            "type": "static",
+            "description": "Say hi",
+            "usage": "`hello`",
+            "response": ["Hi!", "Hello!", "Howdy!"],
+            "has_user_message": false
+        },        
         "help": {
             "key_words": [
                 "help",
                 "usage"
             ],
+            "match_type": "exact",
             "type": "help",
             "description": "Get help",
             "usage": "help"
