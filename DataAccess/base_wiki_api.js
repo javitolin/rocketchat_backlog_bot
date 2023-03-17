@@ -1,15 +1,15 @@
 const config = require('config');
 const axios = require("axios");
 
-const { authorization_string, ticket } = require(`./${config.get("general.platform")}/parameters`)
+const { authorization_string, wiki } = require(`./${config.get("general.platform")}/parameters`)
 
 const ENCODED_PAT = Buffer.from(authorization_string).toString('base64');
 
 const client = axios.create({
-    baseURL: ticket.base_url,
+    baseURL: wiki.base_url,
     headers: {
         'Accept': 'application/json',
-        'Content-Type': ticket.content_type,
+        'Content-Type': wiki.content_type,
         "Authorization": `Basic ${ENCODED_PAT}`
     }
 });

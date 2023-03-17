@@ -1,20 +1,23 @@
 const config = require('config');
 
 const ADO_PAT = config.get("ado.pat")
-const ADO_URL = encodeURI(config.get("ado.url"));
-const CONTENT_TYPE = "application/json-patch+json"
+const ADO_URL = encodeURI(config.get("ado.ticket.url"));
+const ADO_ALM_URL = encodeURI(config.get("ado.wiki.url"))
 
 // ADO_URL (Should be https://{instance}/{collection}/{project}/_apis)
-if (!ADO_URL || !ADO_PAT) {
+if (!ADO_URL || !ADO_PAT || !ADO_ALM_URL) {
     console.error("Missing required environment variables for ADO.");
     process.exit(1);
 }
 
-
-const AUTHORIZATION_STRING = `:${ADO_PAT}`
-
-module.exports = { 
-    authorization_string: AUTHORIZATION_STRING, 
-    base_url: ADO_URL, 
-    content_type: CONTENT_TYPE 
+module.exports = {
+    authorization_string: `:${ADO_PAT}`,
+    ticket: {
+        base_url: ADO_URL,
+        content_type: "application/json-patch+json"
+    },
+    wiki: {
+        base_url: ADO_ALM_URL,
+        content_type: "application/json"
+    }
 }

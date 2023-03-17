@@ -12,8 +12,13 @@ if (!JIRA_URL || !JIRA_USERNAME || !JIRA_TOKEN) {
 
 const AUTHORIZATION_STRING = `${JIRA_USERNAME}:${JIRA_TOKEN}`
 
-module.exports = { 
-    authorization_string: AUTHORIZATION_STRING, 
-    base_url: JIRA_URL, 
-    content_type: CONTENT_TYPE 
+module.exports = {
+    authorization_string: AUTHORIZATION_STRING,
+    ticket: {
+        base_url: JIRA_URL,
+        content_type: CONTENT_TYPE
+    },
+    wiki: {
+        content_type: CONTENT_TYPE
+    }
 }

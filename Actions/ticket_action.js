@@ -6,7 +6,7 @@ const TicketActionFactory = require("../DataAccess/ticket_action_factory");
 
 const DEFAULT_ASSIGNEE = config.get("ticket.default_assignee")
 const DOD_FILEPATH = config.get("ticket.dod_filepath")
-const PARENT_TASK_ID = config.get("ticket.parent_task_id")
+const PARENT_INFORMATION = config.get("ticket.parent_information")
 const TAGS = config.get("ticket.tags")
 
 function isMatch(message) {
@@ -27,11 +27,11 @@ async function act(message, requestor_name) {
     title = title.replace("{message}", message);
 
     var dod_content = (await fs.readFile(DOD_FILEPATH)).toString();
-    var parent_task_id = PARENT_TASK_ID;
+    var parent_information = PARENT_INFORMATION;
     var tags = TAGS;
     var assignee = DEFAULT_ASSIGNEE;
 
-    var response = await TicketActionFactory.OpenTicket(title, description, dod_content, parent_task_id, tags, assignee);
+    var response = await TicketActionFactory.OpenTicket(title, description, dod_content, parent_information, tags, assignee);
     if (!response) {
         return "An error occured. Please see the logs for more information."
     }

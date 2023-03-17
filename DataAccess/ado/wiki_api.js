@@ -1,4 +1,4 @@
-const adoClient = require("./search_api")
+const client = require("../base_wiki_api")
 const configuration = require('config');
 const { build_wiki_url } = require("../../Utils/ado_string_builders");
 
@@ -19,7 +19,7 @@ async function SearchWiki(message, maxNumberOfResults) {
     };
 
     try {
-        var response = await adoClient.searchApi(config);
+        var response = await client.client(config);
         console.log("response.data", response.data)
         if (response.data.count === 0) { 
             return [] 

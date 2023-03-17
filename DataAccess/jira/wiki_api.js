@@ -1,4 +1,4 @@
-const client = require("./search_api")
+const client = require("../base_wiki_api")
 const configuration = require('config');
 
 async function SearchWiki(message, maxNumberOfResults) {

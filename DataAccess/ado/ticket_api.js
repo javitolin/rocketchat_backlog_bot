@@ -1,12 +1,9 @@
 const client = require("../base_ticket_api")
-const configuration = require('config');
 const config = require('config');
 
-const ADO_URL = configuration.get("ado.url");
-const TASK_URL = configuration.get("ado.task.task_url");
-const ADO_AREA_PATH = config.get("ado.task.area_path")
+const ADO_AREA_PATH = config.get("ado.ticket.area_path")
 
-async function OpenTicket(title, description, dod_content, parent_task_id, tags, assignee) {
+async function OpenTicket(title, description, dod_content, parent_url, tags, assignee) {
 
     var data = [{
         "op": "add",
@@ -37,7 +34,7 @@ async function OpenTicket(title, description, dod_content, parent_task_id, tags,
         "path": "/relations/-",
         "value": {
             "rel": "System.LinkTypes.Hierarchy-Reverse",
-            "url": encodeURI(`${ADO_URL}/wit/workitems/${parent_task_id}`)
+            "url": parent_url
         }
     }];
 
@@ -61,7 +58,6 @@ async function OpenTicket(title, description, dod_content, parent_task_id, tags,
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: TASK_URL,
         data: data
     };
 

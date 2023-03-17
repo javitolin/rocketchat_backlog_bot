@@ -1,3 +1,5 @@
 node_modules/
 config/default.json
+config/ado_params.json
+config/jira_params.json
 *.tar
