@@ -3,16 +3,15 @@ const axios = require("axios")
 
 const JIRA_URL = encodeURI(config.get("jira.url"));
 const JIRA_USERNAME = config.get("jira.username")
-const JIRA_PASSWORD = config.get("jira.password")
+const JIRA_TOKEN = config.get("jira.token")
 
-// JIRA_URL ()
-
-if (!JIRA_URL || !JIRA_USERNAME || !JIRA_PASSWORD) {
+if (!JIRA_URL || !JIRA_USERNAME || !JIRA_TOKEN) {
     console.error("Missing required environment variables for Jira.");
     process.exit(1);
 }
 
-const ENCODED_PAT = Buffer.from(`${JIRA_USERNAME}:${JIRA_PASSWORD}`).toString('base64');
+const ENCODED_PAT = Buffer.from(`${JIRA_USERNAME}:${JIRA_TOKEN}`).toString('base64');
+console.log("ENCODED_PAT", ENCODED_PAT);
 
 const jiraClient = axios.create({
     baseURL: JIRA_URL,
@@ -35,4 +34,4 @@ jiraClient.interceptors.response.use(
     }
 );
 
-module.exports = { adoClient: jiraClient };
+module.exports = { client: jiraClient };

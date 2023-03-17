@@ -2,7 +2,7 @@ const Helper = require("./action_utils")
 const fs = require("fs").promises
 const config = require("config")
 
-const OpenTicket = require("../DataAccess/TicketActionFactory");
+const TicketActionFactory = require("../DataAccess/TicketActionFactory");
 
 const DEFAULT_ASSIGNEE = config.get("ticket.default_assignee")
 const DOD_FILEPATH = config.get("ticket.dod_filepath")
@@ -31,14 +31,14 @@ async function act(message, requestor_name) {
     var tags = TAGS;
     var assignee = DEFAULT_ASSIGNEE;
 
-    var response = await OpenTicket.OpenTicket(title, description, dod_content, parent_task_id, tags, assignee);
+    var response = await TicketActionFactory.OpenTicket(title, description, dod_content, parent_task_id, tags, assignee);
     if (!response) {
         return "An error occured. Please see the logs for more information."
     }
 
     return [
         "A ticket was opened.",
-        `Please follow the issue using this [link](${response._links.html.href})`
+        `Please follow the issue using this [link](${response.ticket_url})`
     ]
 }
 

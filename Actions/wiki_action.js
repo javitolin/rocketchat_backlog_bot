@@ -1,4 +1,4 @@
-const SearchWiki = require("../DataAccess/ADO/wiki_api")
+const SearchWiki = require("../DataAccess/ado/wiki_api")
 const config = require('config');
 const Helper = require("./action_utils");
 
