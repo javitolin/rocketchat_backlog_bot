@@ -1,4 +1,4 @@
-const client = require("./ado_api")
+const client = require("../base_api")
 const configuration = require('config');
 const config = require('config');
 
@@ -66,11 +66,11 @@ async function OpenTicket(title, description, dod_content, parent_task_id, tags,
     };
 
     try {
-        var response = await client.adoClient(config);
+        var response = await client.client(config);
         return { ticket_id: response.data.id, ticket_url: response.data._links.html.href }
     }
     catch (err) {
-        console.log("Error running adoClient", err);
+        console.log("Error running client", err);
         return null;
     }
 }

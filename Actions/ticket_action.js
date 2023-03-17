@@ -2,7 +2,7 @@ const Helper = require("./action_utils")
 const fs = require("fs").promises
 const config = require("config")
 
-const TicketActionFactory = require("../DataAccess/TicketActionFactory");
+const TicketActionFactory = require("../DataAccess/ticket_action_factory");
 
 const DEFAULT_ASSIGNEE = config.get("ticket.default_assignee")
 const DOD_FILEPATH = config.get("ticket.dod_filepath")

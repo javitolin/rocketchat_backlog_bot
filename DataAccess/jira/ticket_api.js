@@ -1,8 +1,8 @@
-const client = require("./jira_api")
+const client = require("../base_api")
 const configuration = require('config');
 const config = require('config');
 
-const JIRA_URL = configuration.get("jira.url");
+const JIRA_URL = configuration.get("jira.ticket.base_url");
 const DOD_FIELD_ID = config.has("jira.ticket.dod_field_id") ? config.get("jira.ticket.dod_field_id") : -1;
 const ISSUE_TYPE = config.get("jira.ticket.issue_type_id");
 const PROJECT_ID = config.get("jira.ticket.project_id");
