@@ -2,8 +2,6 @@ const config = require('config');
 const Helper = require("./action_utils");
 const WikiActionFactory = require("../DataAccess/wiki_action_factory");
 
-const MAX_SEARCH_RESULTS = config.get("ado.wiki.max_search_results")
-
 function isMatch(message) {
     const key_words = config.get("actions.wiki_search.key_words");
     const match_type = config.get("actions.wiki_search.match_type");
@@ -14,7 +12,7 @@ async function act(searchTerm, requestor_name) {
     searchTerm = Helper.getTextFromMessage(searchTerm);
 
     console.log("Searching for", searchTerm, "by", requestor_name)
-    var response = await WikiActionFactory.SearchWiki(searchTerm, MAX_SEARCH_RESULTS);
+    var response = await WikiActionFactory.SearchWiki(searchTerm);
     if (!response) {
         return "An error occured. Please see the logs for more information."
     }

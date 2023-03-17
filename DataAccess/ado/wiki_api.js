@@ -1,12 +1,13 @@
 const client = require("../base_wiki_api")
 const configuration = require('config');
-const { build_wiki_url } = require("../../Utils/ado_string_builders");
+const { build_string } = require("../../Utils/build_string");
+const MAX_SEARCH_RESULTS = configuration.get("ado.wiki.max_search_results")
 
-async function SearchWiki(message, maxNumberOfResults) {
+async function SearchWiki(message) {
     var data = {
         "searchText": message,
         "$skip": 0,
-        "$top": maxNumberOfResults,
+        "$top": MAX_SEARCH_RESULTS,
         "$orderBy": null,
         "includeFacets": true
     };
@@ -14,7 +15,6 @@ async function SearchWiki(message, maxNumberOfResults) {
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: encodeURI(configuration.get("ado.wiki.wiki_search_url")),
         data: data
     };
 
@@ -29,7 +29,7 @@ async function SearchWiki(message, maxNumberOfResults) {
 
         for (let i = 0; i < response.data.count; i++) {
             let result = response.data.results[i];
-            let wiki_result_url = build_wiki_url(result);
+            let wiki_result_url = build_string(configuration.get("ado.wiki.wiki_result_url"), result)
             var fileName = result.fileName;
 
             return_answer.push({
