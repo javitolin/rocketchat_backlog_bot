@@ -1,9 +1,11 @@
 const adoClient = require("./ado_api")
 const configuration = require('config');
+const config = require('config');
 
 const ADO_URL = configuration.get("ado.url");
+const ADO_AREA_PATH = config.get("ado.task.area_path")
 
-async function OpenTicket(title, description, dod_content, area_path, parent_task_id, tags, assignee) {
+async function OpenTicket(title, description, dod_content, parent_task_id, tags, assignee) {
 
     var data = [{
         "op": "add",
@@ -21,7 +23,7 @@ async function OpenTicket(title, description, dod_content, area_path, parent_tas
         "op": "add",
         "path": "/fields/System.AreaPath",
         "from": null,
-        "value": area_path
+        "value": ADO_AREA_PATH
     },
     {
         "op": "add",
