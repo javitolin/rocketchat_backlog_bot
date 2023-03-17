@@ -9,4 +9,6 @@ COPY --from=build /app /app
 
 CMD [ "node", "server.js" ]
 
-# docker build . -t rocketadobot && docker run -it -v /mnt/c/projects/RocketBot/config:/app/config -v /mnt/c/projects/RocketBot/dod:/data/dod rocketadobot
+# docker build . -t rocketadobot 
+# docker run -it -v /mnt/c/projects/RocketBot/config:/app/config -v /mnt/c/projects/RocketBot/dod:/data/dod rocketadobot
+# docker save rocketadobot -o rocketadobot.tar
