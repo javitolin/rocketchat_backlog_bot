@@ -12,7 +12,6 @@ if (!ADO_ALM_URL || !ADO_PAT) {
 }
 
 const ENCODED_PAT = Buffer.from(`:${ADO_PAT}`).toString('base64');
-
 const searchApi = axios.create({
   baseURL: encodeURI(ADO_ALM_URL),
   headers: {

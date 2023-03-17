@@ -72,7 +72,7 @@ async function OpenTicket(title, description, dod_content, parent_task_id, tags,
 
     try {
         var response = await client.client(config);
-        return { ticket_url: TICKET_LINK.replace("{ticket_id}", response.data.key) }
+        return { ticket_id: response.data.key, ticket_url: TICKET_LINK.replace("{ticket_id}", response.data.key) }
     }
     catch (err) {
         console.log("Error running client", err);

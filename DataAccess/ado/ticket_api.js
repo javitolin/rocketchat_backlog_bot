@@ -3,6 +3,7 @@ const configuration = require('config');
 const config = require('config');
 
 const ADO_URL = configuration.get("ado.url");
+const TASK_URL = configuration.get("ado.task.task_url");
 const ADO_AREA_PATH = config.get("ado.task.area_path")
 
 async function OpenTicket(title, description, dod_content, parent_task_id, tags, assignee) {
@@ -56,17 +57,17 @@ async function OpenTicket(title, description, dod_content, parent_task_id, tags,
             "value": tags
         })
     }
-
+    
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: configuration.get("ado.task.task_url"),
+        url: TASK_URL,
         data: data
     };
 
     try {
         var response = await client.adoClient(config);
-        return { ticket_url: response.data._links.html.href }
+        return { ticket_id: response.data.id, ticket_url: response.data._links.html.href }
     }
     catch (err) {
         console.log("Error running adoClient", err);

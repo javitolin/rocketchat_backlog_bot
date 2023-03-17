@@ -37,8 +37,8 @@ async function act(message, requestor_name) {
     }
 
     return [
-        "A ticket was opened.",
-        `Please follow the issue using this [link](${response.ticket_url})`
+        `Ticket id ${response.ticket_id} was opened.`,
+        `You may follow it using this [link](${response.ticket_url})`
     ]
 }
 
