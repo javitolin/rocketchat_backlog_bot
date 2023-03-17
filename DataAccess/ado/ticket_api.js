@@ -1,4 +1,4 @@
-const client = require("../base_api")
+const client = require("../base_ticket_api")
 const configuration = require('config');
 const config = require('config');
 
