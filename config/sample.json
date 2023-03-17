@@ -1,31 +1,54 @@
 {
     "rocketchat": {
-        "url": "<RocketChatURL>",
-        "user": "<BotUser>",
-        "password": "<BotPassword>",
+        "url": "<ROCKETCHAT_URL>",
+        "user": "<ROCKETCHAT_BOT_USERNAME>",
+        "password": "<ROCKETCHAT_BOT_PASSWORD>",
         "use_ssl": "",
-        "bot_room": "ticket",
+        "bot_room": "<ROCKETCHAT_ROOM>",
         "field_for_name": "name",
-        "bot_manager_user": "@dev"
+        "bot_manager_user": "<ROCKETCHAT_BOT_MAINTAINER>"
+    },
+    "general": {
+        "platform": "ado"
+    },
+    "ticket": {
+        "dod_filepath": "dod",
+        "parent_information": "<ado: FULL_PATH_TO_PARENT, jira: id of parent>",
+        "tags": "tag1;tag2",
+        "default_assignee": "",
+        "title_format": "{message}",
+        "description_format": "Auto ticket from bot. User: {requestor_name}. \nMessage: {message}"
     },
     "ado": {
-        "url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_apis",
-        "pat": "<YOUR PAT>",
-        "alm_url": "https://almsearch.dev.azure.com/<CollectionName>/<ProjectName>/_apis",
-        "task": {
-            "task_url": "/wit/workitems/$Product Backlog Item?api-version=7.0",
-            "dod_filepath": "dod",
-            "area_path": "<AreaPath>",
-            "parent_task_id": 3,
-            "tags": "tag1;tag2",
-            "default_assignee": "",
-            "title_format": "{message}",
-            "description_format": "Auto ticket from bot. User: {requestor_name}. \nMessage: {message}"
+        "pat": "<PAT>",
+        "ticket": {
+            "url": "https://dev.azure.com/<AREA>/<PROJECT>/_apis/wit/workitems/$Product Backlog Item?api-version=7.0",
+            "area_path": "<AREA_PATH>",
+            "response_id": "{id}",
+            "response_link": "{_links.html.href}"
         },
         "wiki": {
+            "url": "https://almsearch.dev.azure.com/<AREA>/<PROJECT>/_apis/search/wikisearchresults?recursionLevel=full&includeContent=True&api-version=7.0",
             "max_search_results": 10,
-            "wiki_search_url": "/search/wikisearchresults?recursionLevel=full&includeContent=True&api-version=7.0",
-            "wiki_result_url": "https://dev.azure.com/<CollectionName>/<ProjectName>/_wiki/wikis/{project}?pagePath={path_no_md}"
+            "result_url": "https://dev.azure.com/<AREA>/<PROJECT>/_wiki/wikis/{wiki.name}?pagePath={path_no_md}",
+            "result_title": "{fileName}"
+        }
+    },
+    "jira": {
+        "username": "<JIRA_USERNAME>",
+        "token": "<JIRA_TOKEN>",
+        "ticket": {
+            "base_url": "https://<JIRA_URL>/rest/api/3/issue",
+            "project_id": "<PROJECT_ID>",
+            "issue_type_id": "<ISSUE_TYPE_ID>",
+            "dod_field_id": "<DOD_FIELD_ID>",
+            "response_id": "{key}",
+            "response_link": "https://<JIRA_URL>/browse/{key}"
+        },
+        "wiki": {
+            "url": "https://<JIRA_URL>/wiki/rest/api/search?cql=text~{message}&limit=10",
+            "result_url": "https://<JIRA_URL>/wiki{content._links.webui}",
+            "result_title": "{content.title}"
         }
     },
     "actions": {
@@ -79,9 +102,13 @@
             "type": "static",
             "description": "Say hi",
             "usage": "`hello`",
-            "response": ["Hi!", "Hello!", "Howdy!"],
+            "response": [
+                "Hi!",
+                "Hello!",
+                "Howdy!"
+            ],
             "has_user_message": false
-        },        
+        },
         "help": {
             "key_words": [
                 "help",
