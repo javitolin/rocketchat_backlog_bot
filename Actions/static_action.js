@@ -1,4 +1,5 @@
 const config = require('config');
+const { build_string_user_inputs } = require('../Utils/build_string');
 const Helper = require("./action_utils")
 
 var static_commands = [];
@@ -50,10 +51,10 @@ async function act(message, requestor_name) {
 
     if (found_static_commands.has_user_message) {
         message = Helper.getTextFromMessage(message);
-        return response.replace("{message}", message).replace("{requestor_name}", requestor_name);
+        return build_string_user_inputs(response, requestor_name, message);
     }
 
-    return response.replace("{requestor_name}", requestor_name);
+    return build_string_user_inputs(response, requestor_name, message);
 }
 
 module.exports = { act, isMatch };

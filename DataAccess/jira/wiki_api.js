@@ -18,12 +18,12 @@ async function SearchWiki(message, maxNumberOfResults) {
         let return_answer = []
         for (let i = 0; i < response.data.size; i++) {
             let result = response.data.results[i];
-            let wiki_result_url = build_string(configuration.get("jira.wiki.wiki_result_url"), result);
-            var fileName = build_string(configuration.get("jira.wiki.wiki_result_title"), result, false);
+            let result_url = build_string(configuration.get("jira.wiki.result_url"), result);
+            var result_title = build_string(configuration.get("jira.wiki.result_title"), result, false);
 
             return_answer.push({
-                "filename": fileName,
-                "result_url": wiki_result_url
+                title: result_title,
+                url: result_url
             });
         }
 

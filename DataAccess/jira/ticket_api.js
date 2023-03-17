@@ -1,12 +1,12 @@
 const client = require("../base_ticket_api")
 const configuration = require('config');
 const config = require('config');
+const { build_string } = require("../../Utils/build_string");
 
 const JIRA_URL = configuration.get("jira.ticket.base_url");
 const DOD_FIELD_ID = config.has("jira.ticket.dod_field_id") ? config.get("jira.ticket.dod_field_id") : -1;
 const ISSUE_TYPE = config.get("jira.ticket.issue_type_id");
 const PROJECT_ID = config.get("jira.ticket.project_id");
-const TICKET_LINK = config.get("jira.ticket.ticket_link");
 
 function buildDescriptionObject(description, extra_content) {
     let to_return = {
@@ -72,7 +72,10 @@ async function OpenTicket(title, description, dod_content, parent_task_id, tags,
 
     try {
         var response = await client.client(config);
-        return { ticket_id: response.data.key, ticket_url: TICKET_LINK.replace("{ticket_id}", response.data.key) }
+        return {
+            id: build_string(configuration.get("jira.ticket.response_id"), response.data),
+            url: build_string(configuration.get("jira.ticket.response_link"), response.data)
+        }
     }
     catch (err) {
         console.log("Error running client", err);

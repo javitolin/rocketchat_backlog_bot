@@ -3,6 +3,7 @@ const fs = require("fs").promises
 const config = require("config")
 
 const TicketActionFactory = require("../DataAccess/ticket_action_factory");
+const { build_string_user_inputs } = require("../Utils/build_string");
 
 const DEFAULT_ASSIGNEE = config.get("ticket.default_assignee")
 const DOD_FILEPATH = config.get("ticket.dod_filepath")
@@ -18,13 +19,8 @@ function isMatch(message) {
 async function act(message, requestor_name) {
     message = Helper.getTextFromMessage(message);
 
-    var description = config.get("ticket.description_format");
-    description = description.replace("{requestor_name}", requestor_name);
-    description = description.replace("{message}", message);
-
-    var title = config.get("ticket.title_format");
-    title = title.replace("{requestor_name}", requestor_name);
-    title = title.replace("{message}", message);
+    var description = build_string_user_inputs(config.get("ticket.description_format"), requestor_name, message);
+    var title = build_string_user_inputs(config.get("ticket.title_format"), requestor_name, message);
 
     var dod_content = (await fs.readFile(DOD_FILEPATH)).toString();
     var parent_information = PARENT_INFORMATION;
@@ -37,8 +33,8 @@ async function act(message, requestor_name) {
     }
 
     return [
-        `Ticket id ${response.ticket_id} was opened.`,
-        `You may follow it using this [link](${response.ticket_url})`
+        `Ticket id ${response.id} was opened.`,
+        `You may follow it using this [link](${response.url})`
     ]
 }
 

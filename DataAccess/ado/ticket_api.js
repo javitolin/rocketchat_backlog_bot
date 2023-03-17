@@ -1,7 +1,8 @@
 const client = require("../base_ticket_api")
-const config = require('config');
+const { build_string } = require("../../Utils/build_string");
+const configuration = require('config');
 
-const ADO_AREA_PATH = config.get("ado.ticket.area_path")
+const ADO_AREA_PATH = configuration.get("ado.ticket.area_path")
 
 async function OpenTicket(title, description, dod_content, parent_url, tags, assignee) {
 
@@ -54,7 +55,7 @@ async function OpenTicket(title, description, dod_content, parent_url, tags, ass
             "value": tags
         })
     }
-    
+
     var config = {
         method: 'post',
         maxBodyLength: Infinity,
@@ -63,7 +64,10 @@ async function OpenTicket(title, description, dod_content, parent_url, tags, ass
 
     try {
         var response = await client.client(config);
-        return { ticket_id: response.data.id, ticket_url: response.data._links.html.href }
+        return {
+            id: build_string(configuration.get("ado.ticket.response_id"), response.data),
+            url: build_string(configuration.get("ado.ticket.response_link"), response.data)
+        }
     }
     catch (err) {
         console.log("Error running client", err);

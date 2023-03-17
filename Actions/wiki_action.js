@@ -21,13 +21,11 @@ async function act(searchTerm, requestor_name) {
         return "No wikis for you"
     }
 
-    return_answer = ["Found the following wiki articles:"]
-
-    console.log("response", response)
+    return_answer = ["Found the following articles:"]
 
     for (let i = 0; i < response.length; i++) {
         let result = response[i];
-        return_answer.push(`- [${result.filename}](${result.result_url})`)
+        return_answer.push(`- [${result.title}](${result.url})`)
     }
 
     return return_answer

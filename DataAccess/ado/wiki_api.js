@@ -20,7 +20,6 @@ async function SearchWiki(message) {
 
     try {
         var response = await client.client(config);
-        console.log("response.data", response.data)
         if (response.data.count === 0) { 
             return [] 
         }
@@ -29,12 +28,12 @@ async function SearchWiki(message) {
 
         for (let i = 0; i < response.data.count; i++) {
             let result = response.data.results[i];
-            let wiki_result_url = build_string(configuration.get("ado.wiki.wiki_result_url"), result)
-            var fileName = result.fileName;
+            let result_url = build_string(configuration.get("ado.wiki.result_url"), result)
+            var result_title = build_string(configuration.get("ado.wiki.result_title"), result);
 
             return_answer.push({
-                "filename": fileName,
-                "result_url": wiki_result_url
+                title: result_title,
+                url: result_url
             });
         }
 
