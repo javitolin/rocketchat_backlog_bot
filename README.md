@@ -28,6 +28,6 @@ For "`jira.token`" value, you need to configure an access token ([help](https://
 5. Create a new Pull Request
 
 ## Meta
-[AsadoDevCulture](https://AsadoDevCulture.com) 
-[@jdorfsman](https://twitter.com/jdorfsman)
-Distributed under the MIT license.
+* [AsadoDevCulture](https://AsadoDevCulture.com) 
+* [@jdorfsman](https://twitter.com/jdorfsman)
+* Distributed under the MIT license.
